@@ -2,14 +2,21 @@
   <div class="container py-5">
     <NavTabs />
     <h1 class="mt-5">Latest Activity</h1>
-    <NewestRestaurant :restaurants="restaurants"/>
+    <div class="row">
+      <div class="col-md-6">
+        <NewestRestaurant :restaurants="restaurants"/>
+      </div>
+      <div class="col-md-6"> 
+        <NewestComment :comments="comments"/>
+      </div>
+		</div>
   </div>
 </template>
 
 <script>
 import NavTabs from "../components/NavTabs.vue";
 import NewestRestaurant from "../components/NewestRestaurant.vue"
-
+import NewestComment from "../components/NewestComment.vue"
 const dummyData = {
   'restaurants': [
     {
@@ -521,6 +528,7 @@ export default {
   components: {
     NavTabs,
     NewestRestaurant,
+		NewestComment,
   },
 	data() {
 		return {
@@ -533,8 +541,9 @@ export default {
 	},
 	methods: {
 		fetchFeeds() {
-			this.restaurants = dummyData.restaurants
-			this.comments = dummyData.comments
+			const {restaurants, comments} = dummyData
+			this.restaurants = restaurants
+			this.comments = comments.filter(comment => comment.Restaurant && comment.text)
 		}
 	}
 
