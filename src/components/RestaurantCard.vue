@@ -19,10 +19,10 @@
       </div>
       <div class="card-footer">
         <button type="button" class="btn btn-danger btn-border favorite mr-2">
-          移除最愛
+          Remove From Favorite
         </button>
         <button type="button" class="btn btn-primary btn-border favorite mr-2">
-          加到最愛
+          Add To Favorite
         </button>
         <button type="button" class="btn btn-danger like mr-2">Unlike</button>
         <button type="button" class="btn btn-primary like mr-2">Like</button>
