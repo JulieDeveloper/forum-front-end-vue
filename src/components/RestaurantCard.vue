@@ -24,8 +24,12 @@
         <button v-else @click.stop.prevent="addFavorite" type="button" class="btn btn-primary btn-border favorite mr-2">
           Add To Favorite
         </button>
-        <button v-if="restaurant.isLiked" @click.stop.prevent="deleteLike" type="button" class="btn btn-danger like mr-2">Unlike</button>
-        <button v-else @click.stop.prevent="addLike" type="button" class="btn btn-primary like mr-2">Like</button>
+        <button v-if="restaurant.isLiked" @click.stop.prevent="deleteLike" type="button" class="btn btn-danger like mr-2">
+          Unlike
+        </button>
+        <button v-else @click.stop.prevent="addLike" type="button" class="btn btn-primary like mr-2">
+          Like
+        </button>
       </div>
     </div>
   </div>
