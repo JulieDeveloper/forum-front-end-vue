@@ -18,7 +18,7 @@
           <a href="#"> {{ comment.User.name }} </a>
         </h3>
         <p> {{ comment.text }} </p>
-        <footer class="blockquote-footer">{{ comment.createdAt }}</footer>
+        <footer class="blockquote-footer">{{ comment.createdAt | fromNow}}</footer>
       </blockquote>
       <hr />
     </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import {fromNowFilter} from '../utils/mixins'
 
 const dummyUser = {
   currentUser: {
@@ -39,6 +40,7 @@ const dummyUser = {
 }
 
 export default {
+  mixins:[fromNowFilter],
   props:{
     restaurantComments: {
       type: Array,
