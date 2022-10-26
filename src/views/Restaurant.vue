@@ -7,6 +7,7 @@
     <hr>
     <RestaurantComments 
       :restaurant-comments="restaurantComments"
+      @after-delete-comment="afterDeleteComment"
     />
     <!-- 新增評論 CreateComment -->
   </div>
@@ -141,6 +142,9 @@ export default {
       }
 
       this.restaurantComments = dummyData.restaurant.Comments
+    },
+    afterDeleteComment(commentId){
+      this.restaurantComments = this.restaurantComments.filter(comment => comment.id !== commentId)
     }
   }
 }
