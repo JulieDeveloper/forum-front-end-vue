@@ -164,10 +164,10 @@ export default {
       this.restaurantComments = this.restaurantComments.filter(comment => comment.id !== commentId)
     },
     afterCreateComment(payload){
-      const { commentId, reataurantId, text } = payload
+      const { commentId, restaurantId, text } = payload
       this.restaurantComments.push({
         id: commentId,
-        RestaurantId: reataurantId,
+        RestaurantId: restaurantId,
         User: {
           id: this.currentUser.id,
           name: this.currentUser.name
