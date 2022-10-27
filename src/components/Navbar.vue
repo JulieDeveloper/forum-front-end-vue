@@ -20,7 +20,7 @@
         <!-- user === admin -->
         <router-link
           v-if="currentUser.isAdmin"
-          to="#"
+          to="/admin/restaurants"
           class="text-white mr-3"
         >
           Backstage
