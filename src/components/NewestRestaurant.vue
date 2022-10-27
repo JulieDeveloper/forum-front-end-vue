@@ -7,7 +7,11 @@
         :key="restaurant.id"
       >
         <h4>
-          <a href="#">{{ restaurant.name }}</a>
+          <router-link
+            :to="{ name:'restaurant', params:{id: restaurantId} }"
+          >
+            {{ restaurant.name }}
+          </router-link>
           <small>
             {{ restaurant.Category? restaurant.Category.name : 'uncategorized'}}
           </small>
