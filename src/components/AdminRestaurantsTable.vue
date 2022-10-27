@@ -5,7 +5,7 @@
         <th scope="col">#</th>
         <th scope="col">Category</th>
         <th scope="col">Name</th>
-        <th scope="col" width="300">操作</th>
+        <th scope="col" width="300">Control</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
           {{ restaurant.id }}
         </th>
         <td>
-          {{ restaurant.Category ? restaurant.Category.name : "未分類" }}
+          {{ restaurant.Category ? restaurant.Category.name : "Uncategorized" }}
         </td>
         <td>
           {{ restaurant.name }}
