@@ -28,7 +28,7 @@
 
         <!-- user === login -->
         <template v-if="isAuthenticated">
-          <router-link to="#" class="text-white mr-3"> 
+          <router-link :to=" { name: 'user', params: {id: currentUser.id} }" class="text-white mr-3"> 
             {{ currentUser.name || "User" }} Hello!
           </router-link>
           <button

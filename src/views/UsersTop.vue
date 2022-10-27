@@ -9,13 +9,13 @@
         v-for = "user in users" 
         :key = "user.id"
       >
-        <a href="#">
+        <router-link :to=" { name:'user', params: { id: user.id } } ">
           <img
-            src="user.image"
+            :src="user.image"
             width="140px"
             height="140px"
           >
-        </a>
+        </router-link>
         <h2>{{ user.name }}</h2>
         <span class="badge badge-secondary">{{ user.FollowerCount }}
  Followers</span>
