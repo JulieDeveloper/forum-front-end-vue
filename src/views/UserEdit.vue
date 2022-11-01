@@ -1,50 +1,44 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <main role="main">
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <ProfileCard
-          :id="profile.id"
-          :name="profile.name"
-          :email="profile.email"
-          :image="profile.image"
-          :followingsNum="profile.Followings.length"
-          :followersNum="profile.Followers.length"
-          :commentsNum="profile.Comments.length"
-          :favoritedRestaurantsNum="profile.FavoritedRestaurants.length"
+  <div class="container py-5">
+    <form @submit.stop.prevent="handleSubmit">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          v-model="profile.name"
+          id="name"
+          type="text"
+          name="name"
+          class="form-control"
+          placeholder="Enter Name"
+          required
         />
-        <div class="row">
-            <div class="col-md-4">
-              <FollowingsCard 
-                :followings="profile.Followings"
-              />
-              <br>
-              <FollowersCard 
-                :followers="profile.Followers"
-              />
-            </div>
-            <div class="col-md-8">
-              <CommentsCard 
-                :comments="profile.Comments"
-              />
-              <br>
-              <FavoritedRestaurantsCard 
-                :favoritedRestaurants="profile.FavoritedRestaurants"
-              />
-            </div>
-        </div>
       </div>
-    </div>
-  </main>
+
+      <div class="form-group">
+        <label for="image">Image</label>
+        <img
+          v-if="profile.image"
+          :src="profile.image"
+          class="d-block img-thumbnail mb-3"
+          width="200"
+          height="200"
+        >
+        <input
+          id="image"
+          type="file"
+          name="image"
+          accept="image/*"
+          class="form-control-file"
+          @change="handleFileChange"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 </template>
 <script>
-import ProfileCard from '../components/UserProfileCard.vue'
-import FollowingsCard from '../components/UserFollowingsCard.vue'
-import FollowersCard from '../components/UserFollowersCard.vue'
-import CommentsCard from '../components/UserCommentsCard.vue'
-import FavoritedRestaurantsCard from '../components/UserFavoritedRestaurantsCard.vue'
-
-const dummyProfile = {
+  const dummyProfile = {
   'profile': {
     'id': 1,
     'name': 'root',
@@ -1220,44 +1214,51 @@ const dummyProfile = {
 }
 
 export default {
-  components:{
-    ProfileCard,
-    FollowingsCard,
-    FollowersCard,
-    CommentsCard,
-    FavoritedRestaurantsCard
-  },
-  data() {
+  data(){
     return{
       profile:{
-        id:-1,
+        id: -1,
         name:'',
         email:'',
-        image:'',
-        Followings:[],
-        Followers:[],
-        Comments:[],
-        FavoritedRestaurants: [],
+        image:''
       }
+      
     }
   },
   created(){
-    this.fetchProfile()
+    const { id } = this.$route.params
+    this.fetchProfile(id)
   },
   methods:{
-    fetchProfile(){
+    fetchProfile(profileId){
+
+      const { profile } = dummyProfile
       this.profile = {
-        id:dummyProfile.profile.id,
-        name:dummyProfile.profile.name,
-        email:dummyProfile.profile.email,
-        image:dummyProfile.profile.image,
-        Followings:dummyProfile.profile.Followings,
-        Followers:dummyProfile.profile.Followers,
-        Comments:dummyProfile.profile.Comments,
-        FavoritedRestaurants: dummyProfile.profile.FavoritedRestaurants,
+        ...this.profile,
+        id: profileId,
+        name: profile.name,
+        email: profile.email,
+        image: profile.image
+      }
+    },
+    handleFileChange(e){
+      const { files } = e.target
+      
+      if( files.length === 0 ){
+        this.profile.image = ''
+      }else{
+        const imageURL = window.URL.createObjectURL(files[0])
+        this.profile.image = imageURL
+      }
+    },
+    handleSubmit(e){
+      const form = e.target 
+      const formData = new FormData(form)
+      // 透過 API 將表單資料送到伺服器
+      for (let [name, value] of formData.entries()) {
+        console.log(name + ": " + value);
       }
     }
   }
-
 }
 </script>

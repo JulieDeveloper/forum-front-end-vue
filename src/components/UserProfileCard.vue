@@ -17,7 +17,16 @@
             <li><strong>{{ followersNum }}</strong> followers</li>
           </ul>
           <p>
-            <a href="/users/2/edit"><button type="submit" class="btn btn-primary">edit</button></a>
+            <router-link
+              :to="{ 
+                name: 'user-edit', 
+                params: {id: id} 
+              }"
+            >
+              <button type="submit" class="btn btn-primary">
+                edit
+              </button>
+            </router-link>
           </p>
         </div>
       </div>
@@ -27,6 +36,10 @@
 <script>
   export default{
     props:{
+      id:{
+        type: Number,
+        required: true,
+      },
       name:{
         type: String,
         required: true
